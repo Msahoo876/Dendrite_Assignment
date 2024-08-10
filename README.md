@@ -43,9 +43,11 @@ A simple To-Do List web application that uses Flask and GraphQL, with Keycloak f
    dendrite\Scripts\activate`
    
 6. **Install Dependencies(optional)**;
+   ```bash
    pip install -r requirements.txt
 
-7. **Run the Application**;
+8. **Run the Application**;
+   ```bash
    python app.py
    
 ### Output Screen
