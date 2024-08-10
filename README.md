@@ -34,10 +34,12 @@ A simple To-Do List web application that uses Flask and GraphQL, with Keycloak f
    cd Dendrite_Assignment
    
 2. **Create Virtual Environment(optional)**;
+   ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    
 4. **Activate Virtual Environment**;
+   ```bash
    dendrite\Scripts\activate`
    
 6. **Install Dependencies(optional)**;
