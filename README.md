@@ -38,7 +38,7 @@ A simple To-Do List web application that uses Flask and GraphQL, with Keycloak f
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    
 4. **Activate Virtual Environment**;
-   dendrite\Scripts\activate
+   dendrite\Scripts\activate`
    
 6. **Install Dependencies(optional)**;
    pip install -r requirements.txt
