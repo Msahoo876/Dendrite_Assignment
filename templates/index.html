@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <h1>To-Do List Application</h1>
+    &nbsp
+    <form id="todo-form" action="/graphql" method="post">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="datetime-local" name="time" required>
+        <input type="file" name="image">
+        <button type="submit">Add To-Do</button>
+    </form>
+
+    <h2>&nbsp Buy Pro License: </h2>
+    &nbsp
+    <form id="payment-form">
+        <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+        <button id="buy-pro">Submit Payment</button>
+        <div id="card-errors" role="alert"></div>
+    </form>
+
+    <script>
+        const stripe = Stripe('pk_test_51PleF2JGCm1g3pVzJgGepWV49s8jw5v8I46irH7liRvIVmByjg5UlsmEERb5TTKP5DxxrRqOXYFxssxiMKDz8AzW00TFMoQxiW');
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
+
+        card.on('change', ({error}) => {
+            const displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const {paymentIntent, error} = await stripe.confirmCardPayment(
+                '{{ client_secret }}',
+                {
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name: 'Your Name',
+                        },
+                    },
+                }
+            );
+
+            if (error) {
+                // Show error to your customer (e.g., insufficient funds)
+                console.log(error.message);
+            } else {
+                // The payment has been processed!
+                if (paymentIntent.status === 'succeeded') {
+                    console.log("Payment succeeded!");
+                    
+                }
+            }
+        });
+    </script>
+</body>
+</html>
