@@ -45,3 +45,5 @@ A simple To-Do List web application that uses Flask and GraphQL, with Keycloak f
 
 7. **Run the Application**;
    python app.py
+   
+### Output Screen
